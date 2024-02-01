@@ -4,7 +4,7 @@ require "json"
 
 def get_token
   headers = {
-    "Authorization": "Basic " + Base64.encode64(ENV["BCL_CLIENT_ID"] + ':' + ENV["BCL_CLIENT_SECRET"]).strip,
+    "Authorization": "Basic " + Base64.strict_encode64(ENV["BCL_CLIENT_ID"] + ':' + ENV["BCL_CLIENT_SECRET"]),
     "Content-Type": "application/x-www-form-urlencoded"
   }
   body = { grant_type: "client_credentials" }
@@ -23,7 +23,7 @@ end
 
 def send_sms(number, message)
   headers = {
-    "Authorization": "Basic " + Base64.encode64(ENV["ELK46_USERNAME"] + ":" + ENV["ELK46_PASSWORD"]).strip
+    "Authorization": "Basic " + Base64.strict_encode64(ENV["ELK46_USERNAME"] + ":" + ENV["ELK46_PASSWORD"])
   }
   body = {
     from: "BlastersInc",
