@@ -49,8 +49,13 @@ def sms_message_body(added_by, playlist, track)
   position = playlist["tracks"]["items"].index { |i| i["track"]["id"] == track["track"]["id"] } + 1
   artists = track["track"]["artists"].map { |a| a["name"] }.join(", ")
   track_name = track["track"]["name"]
+  track_url = track["track"]["external_urls"]["spotify"]
 
-  "Ny låt tillagd av #{added_by}! ✨ Kolla låt nummer #{position} så hittar du #{artists} - #{track_name} 🎵"
+  <<-MESSAGE
+  "Ny låt tillagd av #{added_by}! ✨ Kolla låt nummer #{position} så hittar du #{artists} - #{track_name} 🎵
+
+Lyssna: #{track_url}"
+  MESSAGE
 end
 
 def save_file(track)
